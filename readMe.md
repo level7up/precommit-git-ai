@@ -7,6 +7,12 @@ This tool uses [OpenRouter](https://openrouter.ai) or compatible OpenAI endpoint
 
 ---
 
+## Prerequisites
+
+- Node.js >= 18
+- Git
+- OpenRouter API key
+
 ## Installation
 
 1. Install the package globally via NPM:
