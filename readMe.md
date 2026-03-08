@@ -12,7 +12,7 @@ This tool uses [OpenRouter](https://openrouter.ai) or compatible OpenAI endpoint
 1. Install the package globally via NPM:
 
 ```bash
-npm install -g ai-git-review
+npm install -g @levelxup/ai-git-review
 ```
 
 Make sure you have **Node.js >= 18** installed.
@@ -24,7 +24,7 @@ Make sure you have **Node.js >= 18** installed.
 Copy the `.env-example` to `.env` inside the package folder:
 
 ```bash
-cd $(npm root -g)/ai-git-review
+cd $(npm root -g)/@levelxup/ai-git-review
 cp .env-example .env
 ```
 
@@ -62,7 +62,7 @@ nano ~/.git-hooks/pre-commit
 ```sh
 #!/bin/sh
 # Run the global AI reviewer
-AI_REVIEWER="$(npm root -g)/ai-git-review/index.js"
+AI_REVIEWER="$(npm root -g)/@levelxup/ai-git-review/index.js"
 
 if [ ! -f "$AI_REVIEWER" ]; then
     echo "❌ AI reviewer script not found at $AI_REVIEWER"
