@@ -46,10 +46,11 @@ const openai = new OpenAI({
 /**
  * Get staged git diff (only added lines)
  */
+console.log("Getting git diff...");
 function getGitDiff() {
     try {
         const rawDiff = execSync(
-            "git diff --cached -U0 -- '*.php' '*.js' '*.vue' ':!tools/ai-review.js' ':!public/assets'",
+            "git diff --cached -U0 -- '*.php' '*.js' '*.vue' ':!public/assets'",
             { encoding: "utf8", maxBuffer: MAX_BUFFER }
         );
 
