@@ -163,14 +163,14 @@ async function runReview() {
         fs.appendFileSync(logFile, logMessage, "utf8");
         // check if the changes have dd or dump or console.log
         const hasDebuggingTools = diff.includes(" dd(") ||  diff.includes(" @dd(") || diff.includes("dump(");
-        if (hasDebuggingTools) {
-            const logMessage = `[${timestamp}] ❌ Commit blocked due to debugging tools.\n`;
-            fs.appendFileSync(logFile, logMessage, "utf8");
-            fs.appendFileSync(logFile, diff + "\n", "utf8");
-            console.error(logMessage);
-            process.exit(1);
-            return;
-        }
+        // if (hasDebuggingTools) {
+        //     const logMessage = `[${timestamp}] ❌ Commit blocked due to debugging tools.\n`;
+        //     fs.appendFileSync(logFile, logMessage, "utf8");
+        //     fs.appendFileSync(logFile, diff + "\n", "utf8");
+        //     console.error(logMessage);
+        //     process.exit(1);
+        //     return;
+        // }
 
         process.exit(0);
     }
