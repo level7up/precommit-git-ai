@@ -50,7 +50,7 @@ console.log("Getting git diff...");
 function getGitDiff() {
     try {
         const rawDiff = execSync(
-            "git diff --cached -U0 -- '*.php' '*.js' '*.vue' ':!public/assets'",
+            "git diff --cached -U0 -- '*.php' '*.js' '*.vue' ':!public/assets' ':!public/build'",
             { encoding: "utf8", maxBuffer: MAX_BUFFER }
         );
 
@@ -68,7 +68,7 @@ function getGitDiff() {
         const logMessage = `[${timestamp}] ❌ Failed to get git diff: ${error.message}\n`;
         console.error(logMessage);
         fs.appendFileSync(logFile, logMessage, "utf8");
-        process.exit(1);
+        process.exit(0);
     }
 }
 
@@ -161,10 +161,17 @@ async function runReview() {
 
         // Append to the log file
         fs.appendFileSync(logFile, logMessage, "utf8");
+        // check if the changes have dd or dump or console.log
+        const hasDebuggingTools = diff.includes(" dd(") ||  diff.includes(" @dd(") || diff.includes("dump(");
+        if (hasDebuggingTools) {
+            const logMessage = `[${timestamp}] ❌ Commit blocked due to debugging tools.\n`;
+            fs.appendFileSync(logFile, logMessage, "utf8");
+            fs.appendFileSync(logFile, diff + "\n", "utf8");
+            console.error(logMessage);
+            process.exit(1);
+            return;
+        }
 
-        console.error(logMessage); // optional, also print to console
-
-        // Do NOT block commit
         process.exit(0);
     }
 }

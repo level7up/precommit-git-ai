@@ -1,6 +1,7 @@
 {
     "name": "@levelxup/ai-git-review",
     "version": "1.0.0",
+    "type": "module",
     "description": "AI Git Code Reviewer for Laravel + Vue projects",
     "main": "index.js",
     "bin": {
